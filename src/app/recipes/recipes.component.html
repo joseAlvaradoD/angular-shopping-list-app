@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-7">
-      <app-recipe-list (recipeSelected) = "onSelectRecipe($event)"></app-recipe-list>
+      <app-recipe-list></app-recipe-list>
     </div>
     <div class="col-md-5">
-      <app-recipe-detail *ngIf="recipeSelected" [(recipe)]="recipeSelected"></app-recipe-detail>
+      <app-recipe-detail *ngIf="recipeSelected" [recipe] = "recipeSelected"></app-recipe-detail>
     </div>
   </div>
 </div>
