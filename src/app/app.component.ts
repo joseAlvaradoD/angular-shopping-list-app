@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-shopping-list-app';
-  selectedMenu: string;
-
-  onSelectMenu(menu: string): void{
-    this.selectedMenu = menu;
-  }
 }

@@ -24,5 +24,10 @@ export class RecipeService{
   getRecipes():Recipe[]{
     return this.recipes;
   }
+
+  getRecipe(idx: number): Recipe{
+    return this.recipes[idx];
+  }
+  
   recipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
 }

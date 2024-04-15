@@ -4,7 +4,7 @@
       <app-recipe-list></app-recipe-list>
     </div>
     <div class="col-md-5">
-      <app-recipe-detail *ngIf="recipeSelected" [recipe] = "recipeSelected"></app-recipe-detail>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
