@@ -1,7 +1,14 @@
+import { Subject } from "rxjs";
 import { Ingredient } from "../models/ingredient.model";
 
 export class ShoppingListService {
   private ingredients: Ingredient[] = [];
+  startingEditing:Subject<number> = new Subject<number>();
+
+  constructor(){
+    this.addIngredient(new Ingredient("Apple", 1));
+    this.addIngredient(new Ingredient("Bread", 1));
+  }
 
   getIngredients(): Ingredient[]{
     return this.ingredients.slice();
@@ -13,5 +20,17 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient[]){
     this.ingredients.push(...ingredients);
+  }
+
+  updateIngredient(index: number, ingredient: Ingredient): void{
+    this.ingredients[index] = ingredient;
+  }
+
+  deleteIngredient(index: number): void{
+    this.ingredients.splice(index, 1);
+  }
+
+  getIngredeint(index: number): Ingredient{
+    return this.ingredients[index];
   }
 }
