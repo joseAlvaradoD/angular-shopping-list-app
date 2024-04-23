@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular-shopping-list-app';
+  filteredValue: string = '';
+  title = 'shopping list app';
+  list: string[] = ['asd','asd','dfafg','asdafg','zzasdff'];
 }

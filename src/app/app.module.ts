@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +18,8 @@ import { RoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './services/recipe.service';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -32,13 +35,16 @@ import { RecipeService } from './services/recipe.service';
       DropdownDirective,
       HomeComponent,
       RecipeStartComponent,
-      RecipeEditComponent
+      RecipeEditComponent,
+      ShortenPipe,
+      FilterPipe
    ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RoutingModule
+    RoutingModule,
+    HttpClientModule
   ],
   providers: [
     ShoppingListService,

@@ -1,30 +1,21 @@
 import { Recipe } from "../models/recipe.model";
-import { Ingredient } from "../models/ingredient.model";
 import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RecipeService{
   recipeSelected: Subject<Recipe> = new Subject<Recipe>();
+  recipesChanged: Subject<Recipe[]> = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      "Test Recipe",
-      "some description",
-      "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,272",
-      [
-        new Ingredient("Meat", 1),
-        new Ingredient("French Fries",20),
-      ]),
-    new Recipe(
-      "Test Recipe 2",
-      "some description",
-      "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,272",
-      [
-        new Ingredient("Buns", 2),
-        new Ingredient("Meat",1),
-      ])
-  ];
+  private recipes: Recipe[] = [];
+
   getRecipes():Recipe[]{
-    return this.recipes;
+    return this.recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]):void {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   getRecipe(idx: number): Recipe{
@@ -33,14 +24,17 @@ export class RecipeService{
 
   addRecipe(recipe: Recipe):void{
     this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   uppdateRecipe(index: number, recipe: Recipe):void{
     this.recipes[index] = recipe;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   deleteRecipe(index: number): void{
     this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
 }
