@@ -27,15 +27,13 @@ export class AuthComponent{
 
     this.isLoading = true;
     if(this.isLoginMode){
-      
+      this.isLoading = false;
     }else{
       this.authService.signup(email, password)
         .subscribe(responseData => {
-          console.log(responseData);
           this.isLoading = false;
-        }, error => {
-          console.log(error);
-          this.error = 'An error ocurred!';
+        }, errorResponse => {
+          this.error = errorResponse;
           this.isLoading = false;
         });
     }
