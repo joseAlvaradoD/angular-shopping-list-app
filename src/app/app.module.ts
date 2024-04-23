@@ -21,6 +21,7 @@ import { RecipeService } from './services/recipe.service';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { AuthComponent } from './auth/auth.component';
       RecipeEditComponent,
       ShortenPipe,
       FilterPipe,
-      AuthComponent
+      AuthComponent,
+      LoadingSpinnerComponent
    ],
   imports: [
     BrowserModule,

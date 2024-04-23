@@ -9,6 +9,8 @@ import { NgForm } from '@angular/forms';
 })
 export class AuthComponent{
   isLoginMode: boolean = true;
+  isLoading: boolean = false;
+  error: string = null;
 
   constructor(private authService: AuthService){}
 
@@ -23,14 +25,18 @@ export class AuthComponent{
     const email: string = form.value.email;
     const password: string = form.value.password;
 
+    this.isLoading = true;
     if(this.isLoginMode){
       
     }else{
       this.authService.signup(email, password)
         .subscribe(responseData => {
           console.log(responseData);
+          this.isLoading = false;
         }, error => {
           console.log(error);
+          this.error = 'An error ocurred!';
+          this.isLoading = false;
         });
     }
 
