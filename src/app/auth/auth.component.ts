@@ -1,23 +1,36 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from './auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewContainerRef, OnInit, ComponentRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { PlaceholderDirective } from '../shared/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
-export class AuthComponent{
+export class AuthComponent implements OnDestroy{
+
   isLoginMode: boolean = true;
   isLoading: boolean = false;
   error: string = null;
+  @ViewChild(PlaceholderDirective)
+  alertHost: PlaceholderDirective;
+  private closeSuscription: Subscription;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private viewContainerRef: ViewContainerRef
   ){}
+
+  ngOnDestroy(): void {
+    if(this.closeSuscription){
+      this.closeSuscription.unsubscribe();
+    }
+  }
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -47,9 +60,25 @@ export class AuthComponent{
       this.router.navigate(['/recipes']);
     }, errorResponse => {
       this.error = errorResponse;
+      this.showErrorAlert(errorResponse);
       this.isLoading = false;
     });
 
     form.reset();
   }
+
+  handleClose(): void {
+    this.error = null;
+  }
+
+  private showErrorAlert(errorMessage: string): void {
+    this.alertHost.viewContainerRef.clear();
+    const componentRef: ComponentRef<AlertComponent> = this.alertHost.viewContainerRef.createComponent(AlertComponent, {});
+    componentRef.setInput('message',errorMessage);
+    this.closeSuscription = componentRef.instance.close.subscribe(() => {
+      this.closeSuscription.unsubscribe();
+      this.alertHost.viewContainerRef.clear();
+    });
+  }
+
 }
