@@ -1,6 +1,8 @@
-import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { AuthResponseData, AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +14,10 @@ export class AuthComponent{
   isLoading: boolean = false;
   error: string = null;
 
-  constructor(private authService: AuthService){}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ){}
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -22,21 +27,28 @@ export class AuthComponent{
 
     if(!form.valid) return;
 
+    this.error = '';
+
     const email: string = form.value.email;
     const password: string = form.value.password;
 
+    let authObservable: Observable<AuthResponseData>;
+
     this.isLoading = true;
+
     if(this.isLoginMode){
-      this.isLoading = false;
+      authObservable = this.authService.signin(email, password);
     }else{
-      this.authService.signup(email, password)
-        .subscribe(responseData => {
-          this.isLoading = false;
-        }, errorResponse => {
-          this.error = errorResponse;
-          this.isLoading = false;
-        });
+      authObservable = this.authService.signup(email, password);
     }
+    
+    authObservable.subscribe(responseData => {
+      this.isLoading = false;
+      this.router.navigate(['/recipes']);
+    }, errorResponse => {
+      this.error = errorResponse;
+      this.isLoading = false;
+    });
 
     form.reset();
   }
