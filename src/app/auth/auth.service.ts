@@ -27,7 +27,8 @@ export class AuthService {
     ["EMAIL_NOT_FOUND", "There is no user record corresponding to this identifier. The user may have been deleted."],
     ["INVALID_PASSWORD", "The password is invalid or the user does not have a password."],
     ["USER_DISABLED", "The user account has been disabled by an administrator."],
-    ["INVALID_LOGIN_CREDENTIALS", "The user or password are incorrect please check."]
+    ["INVALID_LOGIN_CREDENTIALS", "The user or password are incorrect please check."],
+    ["TOO_MANY_ATTEMPTS_TRY_LATER", "We have blocked all requests from this device due to unusual activity. Try again later."]
   ]);
 
   user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
