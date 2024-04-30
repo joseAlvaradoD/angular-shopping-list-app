@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { RecipeService } from '../services/recipe.service';
+import { RouterModule } from '@angular/router';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 @Component({
+  standalone: true,
+  imports:[
+    RouterModule,
+    RecipeListComponent
+  ],
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css'

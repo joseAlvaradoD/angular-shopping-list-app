@@ -4,20 +4,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../auth/auth.guard";
 import { ShoppingListComponent } from "./shopping-list.component";
 
-const appRoutes: Routes = [
+export const SHOPPING_LIST_ROUTES: Routes = [
   { 
     path:'', 
     component: ShoppingListComponent,
     canActivate: [AuthGuard]
   },
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forChild(appRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class ShoppingListRoutingModule{}

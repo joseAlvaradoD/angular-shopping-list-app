@@ -8,7 +8,7 @@ import { RecipeResolverService } from "../services/recipe-resolver.service";
 import { RecipesComponent } from "./recipes.component";
 import { RecipeStartComponent } from "./recipe-start/recipe-start.component";
 
-const appRoutes: Routes = [
+export const RECIPES_ROUTES: Routes = [
   { 
     path:'', 
     component: RecipesComponent, 
@@ -21,15 +21,3 @@ const appRoutes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forChild(appRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class RecipesRoutingModule{
-
-}

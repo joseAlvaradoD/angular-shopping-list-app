@@ -3,11 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
-import { RecipesRoutingModule } from './recipes/recipes-routing.module';
-import { ShoppingListRoutingModule } from './shopping-list/shopping-list-routing.module';
-import { AuthRoutingModule } from './auth/auth-routing.module';
+import { AuthComponent } from './auth/auth.component';
 
-const appRoutes: Routes = [
+export const APP_ROUTES: Routes = [
   { 
     path:'', 
     component: HomeComponent,
@@ -15,19 +13,19 @@ const appRoutes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then(x => x.RecipesModule)
+    loadChildren: () => import('./recipes/routes').then(x => x.RECIPES_ROUTES)
   },
   {
     path: 'shopping-list',
-    loadChildren: () => import('./shopping-list/shopping-list.module').then(x => x.ShoppingListModule)
+    loadChildren: () => import('./shopping-list/routes').then(x => x.SHOPPING_LIST_ROUTES)
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(x => x.AuthModule)
+    component: AuthComponent
   }
 ];
 
-@NgModule({
+/*@NgModule({
   imports: [
     RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
   ],
@@ -37,4 +35,4 @@ const appRoutes: Routes = [
 })
 export class RoutingModule { 
   
-}
+}*/

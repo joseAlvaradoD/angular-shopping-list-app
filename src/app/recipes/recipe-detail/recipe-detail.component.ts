@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../models/recipe.model';
 import { ShoppingListService } from '../../services/shopping-list.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
+import { CommonModule } from '@angular/common';
+import { DropdownDirective } from '../../shared/dropdown.directive';
 
 @Component({
+  standalone: true,
+  imports:[
+    RouterModule,
+    CommonModule,
+    DropdownDirective
+  ],
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.css'

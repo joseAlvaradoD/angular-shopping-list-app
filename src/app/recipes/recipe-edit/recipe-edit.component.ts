@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../../models/recipe.model';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../models/ingredient.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports:[
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrl: './recipe-edit.component.css'

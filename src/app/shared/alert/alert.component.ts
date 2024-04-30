@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.css'
