@@ -1,12 +1,18 @@
 import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from './auth.service';
 import { Component, ViewContainerRef, OnInit, ComponentRef, ViewChild, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterOutlet } from '@angular/router';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder.directive';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports:[
+    FormsModule,
+    CommonModule
+  ],
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'

@@ -4,13 +4,15 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { exhaustMap, take } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthInterceptorService implements HttpInterceptor{
 
   constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+    console.log(req);
     return this.authService.user.pipe(
       take(1),
       exhaustMap(user => {

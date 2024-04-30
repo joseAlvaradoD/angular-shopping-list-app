@@ -1,10 +1,14 @@
 import { Ingredient } from './../../models/ingredient.model';
 import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingListService } from '../../services/shopping-list.service';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports:[
+    FormsModule
+  ],
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrl: './shopping-edit.component.css'

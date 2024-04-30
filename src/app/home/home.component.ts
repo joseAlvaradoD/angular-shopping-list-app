@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 
 @Component({
+  standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

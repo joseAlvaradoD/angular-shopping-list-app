@@ -3,8 +3,15 @@ import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { RecipeItemComponent } from './recipe-item/recipe-item.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports:[
+    RecipeItemComponent,
+    CommonModule
+  ],
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css'
