@@ -7,22 +7,22 @@ import { APP_ROUTES } from './app/routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthInterceptorService } from './app/auth/auth-interceptor.service';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { provideStore } from '@ngrx/store';
+import { recipesReducer } from './app/store/recipes.reducer';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(
-      APP_ROUTES,
-      withPreloading(PreloadAllModules),
-    ),
-    provideHttpClient(
-      withInterceptorsFromDi()
-    ),
+    provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
+    provideHttpClient(withInterceptorsFromDi()),
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true,
-    }
-  ]
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptorService,
+        multi: true,
+    },
+    provideStore({
+      recipes: recipesReducer
+    })
+]
 });
 
 // Module implementation

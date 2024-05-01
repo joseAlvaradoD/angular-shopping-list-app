@@ -5,6 +5,9 @@ import { Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DropdownDirective } from '../shared/dropdown.directive';
+import { Store } from '@ngrx/store';
+import { fetch } from '../store/recipes.actions';
+import { Recipe } from '../models/recipe.model';
 
 @Component({
   standalone: true,
@@ -24,7 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ){}
 
   ngOnInit(): void {
@@ -42,7 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   onFetchData(): void{
-    this.dataStorageService.fetchRecipes().subscribe();
+    
+    this.dataStorageService.fetchRecipes().subscribe((recipes:Recipe[]) => {
+      this.store.dispatch(fetch({value: recipes}));
+    });
   }
 
   onLogout():void{
