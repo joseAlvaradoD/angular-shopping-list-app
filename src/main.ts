@@ -9,6 +9,8 @@ import { AuthInterceptorService } from './app/auth/auth-interceptor.service';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { recipesReducer } from './app/store/recipes.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { RecipesEffects } from './app/store/recipes.effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -20,8 +22,9 @@ bootstrapApplication(AppComponent, {
         multi: true,
     },
     provideStore({
-      recipes: recipesReducer
-    })
+        recipes: recipesReducer
+    }),
+    provideEffects([RecipesEffects])
 ]
 });
 
